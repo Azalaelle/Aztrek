@@ -1,0 +1,40 @@
+footer {
+    position: relative;
+    // background: url('../images/nicolas-et-geraldine.jpg');
+    // background-size: cover;
+    background-color: #010127;
+    min-height: 761px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 500;
+    padding: 80px;
+    
+    .copyright{
+        align-self: flex-end;
+    }
+}
+
+
+.infos-footer li {
+    padding: 20px;
+    
+}
+
+.social-nav {
+    align-self: flex-end;
+    padding-right: 100px;
+    ul {
+        display: flex;
+        margin: right;
+        // margin-top: 100px;
+    }
+}
+
+.social-nav ul li {
+
+    padding: 40px;
+}
+
+.copyright{
+    color: white;
+}

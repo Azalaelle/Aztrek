@@ -1,0 +1,53 @@
+.bg-header {
+    width: 100%;
+}
+
+.page-header-inner {
+    position: absolute;
+    top: 0;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // padding: 40px;
+
+    // @media (min-width: $bp-large) {
+    //     flex-direction: row;
+    //     justify-content: space-between;
+    // }
+}
+
+
+
+header{
+    background: url('../images/bg-header.png');
+    background-size: cover;
+    min-height: 761px;
+}
+html, body {
+    margin: 0;
+    height: 100%
+  }
+  form.search-form {
+      display:flex;
+    }
+    form.search-form input{
+        height:30px;
+        margin-top: 20px;
+        opacity: .5;
+        cursor: pointer;
+}
+form.search-form #valider{
+    margin: 23px 5px 0 5px;
+    border:none;
+    background: url('../images/icone-recherche.png')  no-repeat;
+    width: 24px;
+    height:24px;
+
+} 
+  
+   .search-form button{
+    margin: 20px 10px 0 0;
+}
+   #nav-top  li #brochure img, #profil img, #contact img{
+      margin: 20px 10px;
+  }

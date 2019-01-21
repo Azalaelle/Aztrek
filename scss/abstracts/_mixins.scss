@@ -1,0 +1,36 @@
+// Puces
+
+@mixin puce($size, $bgColor){
+
+  display: flex;
+  align-items: center;
+
+  &::before{
+    content: '';
+    display: inline-block;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    background-color: $bgColor;
+    margin-right: $size;
+  }
+
+}// Media queries
+@mixin respond-to($breakpoint) {
+  $raw-query: map-get($breakpoints, $breakpoint);
+
+  @if $raw-query {
+    $query: if(type-of($raw-query)=='string',
+      unquote($raw-query),
+      inspect($raw-query));
+
+    @media #{$query} {
+      @content;
+    }
+  }
+
+  @else {
+    @error 'No value found for `#{$breakpoint}`. '
+    +'Please make sure it is defined in `$breakpoints` map.';
+  }
+}

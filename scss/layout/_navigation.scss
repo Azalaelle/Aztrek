@@ -1,0 +1,75 @@
+#top-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+#nav-top ul {
+  display: flex;
+}
+
+.nav-reseaux {
+  position: fixed;
+  left: 0;
+  top: 30%;
+  z-index: 200;
+}
+
+.nav-reseaux ul li a img {
+  margin: 15px;
+}
+
+.nav-reseaux ul #btn-fb img {
+  margin-left: 22px;
+}
+
+.burger {
+  display: none;
+}
+
+.main-nav {
+  position: relative;
+  z-index: 199;
+  background: #000;
+  height: 80px;
+
+  margin-top: -40px;
+  /* Je n'ai pas compris d'où venait l'espace entre le header et la div de ma nav*/
+
+
+  ul {
+    display: flex;
+    float: right;
+    list-style: none;
+
+    li {
+      float: left;
+      padding: 0;
+      margin: 30px 50px;
+      list-style: none;
+      text-decoration: none;
+
+      a {
+        display: block;
+        text-transform: uppercase;
+
+        &:hover {
+          /* si tu veux mettre une couleur pour le hover*/
+        }
+      }
+      ul {
+        display: none;
+      }
+
+      &:hover ul {
+        background: #000;
+        display: block;
+        position: absolute;
+
+        li {
+          background: #000;
+          float: none;
+        }
+      }
+    }
+  }
+}
