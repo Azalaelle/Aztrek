@@ -105,7 +105,7 @@ h2 {
   /* Je n'ai pas compris d'où venait l'espace entre le header et la div de ma nav*/ }
   .main-nav ul {
     display: flex;
-    float: right;
+    justify-content: flex-end;
     list-style: none; }
     .main-nav ul li {
       float: left;
@@ -133,7 +133,7 @@ h2 {
   margin: 0 auto;
   padding: 0 15px; }
 
-.bg-header {
+.main-nav ul.bg-header {
   width: 100%; }
 
 .page-header-inner {
