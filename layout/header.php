@@ -55,6 +55,8 @@ $user = getCurrentUser();
                         <li><a href="<?= SITE_ADMIN . "logout.php"; ?>"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
                     <?php else: ?>
                         <li><a href="<?= SITE_ADMIN; ?>"><i class="fa fa-sign-in"></i><img src="./images/icone-connexion.png" alt=""></a></a></li>
+                        <li><a href="<?= SITE_URL . "create_account.php"; ?>"><i class="fa fa-user-plus"></i></a></li>
+
                     <?php endif; ?>
                 </ul>
             </nav>

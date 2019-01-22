@@ -1,7 +1,7 @@
 <?php
 require_once '../../../model/database.php';
 
-$categories = getAllEntities("categorie");
+$destinations = getAllEntities("destination");
 
 require_once '../../layout/header.php';
 ?>
@@ -16,9 +16,9 @@ require_once '../../layout/header.php';
         <div class="form-group">
             <label>Catégorie</label>
             <select name="categorie_id" class="form-control">
-                <?php foreach ($categories as $categorie) : ?>
-                    <option value="<?php echo $categorie["id"]; ?>">
-                        <?php echo $categorie["libelle"]; ?>
+                <?php foreach ($destinations as $destination) : ?>
+                    <option value="<?php echo $destination["id"]; ?>">
+                        <?php echo $destination["titre"]; ?>
                     </option>
                 <?php endforeach; ?>
             </select>
@@ -47,10 +47,7 @@ require_once '../../layout/header.php';
             <label>Temps de cuisson</label>
             <input type="time" name="temps_cuisson" class="form-control" required>
         </div>
-        <div class="form-group form-check">
-            <input type="checkbox" name="publie" class="form-check-input" required>
-            <label>Publié ?</label>
-        </div>
+
         <button type="submit" class="btn btn-success">
             <i class="fa fa-check"></i>
             Ajouter

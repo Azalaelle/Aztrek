@@ -8,17 +8,13 @@ function getAllSejour(int $limit = 999)
 SELECT
 sejour.*,
 DATE_FORMAT(sejour.date_depart,'%d-%m-%Y') AS date_depart_format,
-destination.titre AS destination,
-CONCAT(utilisateur.prenom, ' ', LEFT(utilisateur.nom, 1),',') AS pseudo,
-COUNT(favoris.utilisateur_id) AS nb_likes
+destination.titre AS destination
 FROM sejour
 INNER JOIN destination ON sejour.destination_id = destination.id
 INNER JOIN utilisateur  ON sejour.utilisateur_id = utilisateur.id
-LEFT JOIN favoris ON sejour.id = favoris.recette_id
-WHERE sejour.publie = 1
-GROUP BY sejour.id
-ORDER BY sejour.date_depart DESC
-LIMIT $limit
+
+
+
 ";
 
 
@@ -35,22 +31,16 @@ function getOneSejour(int $id): array
 
 
     $query = "
-SELECT
-sejour.*,
-DATE_FORMAT(sejour.date_depart,'%d-%m-%Y') AS date_depart_format,
-destination.titre AS destination,
-CONCAT(utilisateur.prenom, ' ', LEFT(utilisateur.nom, 1),',') AS pseudo,
-COUNT(favoris.utilisateur_id) AS nb_likes
-FROM sejour
-INNER JOIN destination ON sejour.destination_id = destination.id
-INNER JOIN utilisateur  ON sejour.utilisateur_id = utilisateur.id
-LEFT JOIN favoris ON sejour.id = favoris.sejour_id
-WHERE sejour.publie = 1
-AND sejour.id = :id
-GROUP BY sejour.id
-
-
-";
+    SELECT
+        sejour.*,
+        destination.titre AS destination,
+        difficulte.niveau AS difficulte
+    FROM sejour
+    INNER JOIN destination ON sejour.destination_id = destination.id
+    INNER JOIN difficulte ON sejour.difficulte_id = difficulte.id
+    
+    WHERE sejour.id = :id
+    ";
 
 
     $stmt = $connection->prepare($query);
@@ -61,13 +51,13 @@ GROUP BY sejour.id
 
 }
 
-function insertRecette(string $titre, int $destination_id, string $image, string $description, string $description_courte, int $couverts, string $temps_prepa, string $temps_cuisson, int $publie, int $utilisateur_id)
+function insertSejour(string $titre, int $destination_id, string $image, string $description, string $description_courte, int $couverts, string $temps_prepa, string $temps_cuisson, int $publie, int $utilisateur_id)
 {
     global $connection;
 
     $query = "
-    INSERT INTO sejour (titre, image, duree, description, niveau, libelle) 
-    VALUES (:titre, :image, :description, :sejour, :difficulte_id, :difficulte_id, :destination_id)
+    INSERT INTO sejour (titre, image, duree, description, niveau, libelle,prix_indicatif) 
+    VALUES (:titre, :image, :description, :sejour, :difficulte_id, :difficulte_id, :destination_id,:prix_indicatif)
     ";
 
     $stmt = $connection->prepare($query);
@@ -77,8 +67,9 @@ function insertRecette(string $titre, int $destination_id, string $image, string
     $stmt->bindParam(":description", $sejour);
     $stmt->bindParam(":niveau", $difficulte_id);
     $stmt->bindParam(":libelle", $difficulte_id);
-
+    $stmt->bindParam(":libelle", $difficulte_id);
     $stmt->bindParam(":destination_id", $destination_id);
+    $stmt->bindParam(":prix_indicatif", $prix_indicatif);
 
     $stmt->execute();
 }

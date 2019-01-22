@@ -17,3 +17,12 @@ $stmt->execute();
 
 return $stmt->fetchAll();
 }
+function insertDestination(string $titre) {
+    global $connection;
+
+    $query  = "INSERT INTO destination (titre) VALUES (:titre)";
+
+    $stmt = $connection->prepare($query);
+    $stmt->bindParam(":titre", $titre);
+    $stmt->execute();
+}
