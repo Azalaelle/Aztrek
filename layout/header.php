@@ -1,3 +1,9 @@
+<?php
+require_once __DIR__ . "/../functions.php";
+
+$user = getCurrentUser();
+?>
+
 <!doctype html>
 <html lang="fr">
 
@@ -40,9 +46,16 @@
                             <input id="valider" type="submit" name="submit-btn" value="">
                         </form>
                     </li>
-                    <li><a href="#" id="profil"><img src="./images/icone-connexion.png" alt=""></a></li>
+
+<!--                    <li><a href="--><?//= SITE_ADMIN; ?><!--" id="profil"><img src="./images/icone-connexion.png" alt=""></a></li>-->
                     <li><a href="#" id="brochure"><img src="./images/icone-brochure.png" alt=""></a></li>
                     <li><a href="#" id="contact"><img src="./images/icone-contact.png" alt=""></a></li>
+                    <?php if (isset($user)) : ?>
+                        <li><a href="#"><i class="fa fa-user"></i> <?= $user["email"]; ?></a></li>
+                        <li><a href="<?= SITE_ADMIN . "logout.php"; ?>"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
+                    <?php else: ?>
+                        <li><a href="<?= SITE_ADMIN; ?>"><i class="fa fa-sign-in"></i><img src="./images/icone-connexion.png" alt=""></a></a></li>
+                    <?php endif; ?>
                 </ul>
             </nav>
         </div>

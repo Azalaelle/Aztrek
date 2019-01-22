@@ -1,84 +1,84 @@
 <?php
 
-function getAllRecettes(int $limit = 999)
+function getAllSejour(int $limit = 999)
 {
-global $connection;
+    global $connection;
 
-$query = "
+    $query = "
 SELECT
-recette.*,
-DATE_FORMAT(recette.date_creation,'%d-%m-%Y') AS date_creation_format,
-categorie.libelle AS categorie,
+sejour.*,
+DATE_FORMAT(sejour.date_depart,'%d-%m-%Y') AS date_depart_format,
+destination.titre AS destination,
 CONCAT(utilisateur.prenom, ' ', LEFT(utilisateur.nom, 1),',') AS pseudo,
 COUNT(favoris.utilisateur_id) AS nb_likes
-FROM recette
-INNER JOIN categorie ON recette.categorie_id = categorie.id
-INNER JOIN utilisateur  ON recette.utilisateur_id = utilisateur.id
-LEFT JOIN favoris ON recette.id = favoris.recette_id
-WHERE recette.publie = 1
-GROUP BY recette.id
-ORDER BY recette.date_creation DESC
+FROM sejour
+INNER JOIN destination ON sejour.destination_id = destination.id
+INNER JOIN utilisateur  ON sejour.utilisateur_id = utilisateur.id
+LEFT JOIN favoris ON sejour.id = favoris.recette_id
+WHERE sejour.publie = 1
+GROUP BY sejour.id
+ORDER BY sejour.date_depart DESC
 LIMIT $limit
 ";
 
 
-$stmt = $connection->prepare($query);
-$stmt->execute();
+    $stmt = $connection->prepare($query);
+    $stmt->execute();
 
-return $stmt->fetchAll();
+    return $stmt->fetchAll();
 
 }
 
-function getOneRecette(int $id): array
+function getOneSejour(int $id): array
 {
-global $connection;
+    global $connection;
 
 
-$query = "
+    $query = "
 SELECT
-recette.*,
-DATE_FORMAT(recette.date_creation,'%d-%m-%Y') AS date_creation_format,
-categorie.libelle AS categorie,
+sejour.*,
+DATE_FORMAT(sejour.date_depart,'%d-%m-%Y') AS date_depart_format,
+destination.titre AS destination,
 CONCAT(utilisateur.prenom, ' ', LEFT(utilisateur.nom, 1),',') AS pseudo,
 COUNT(favoris.utilisateur_id) AS nb_likes
-FROM recette
-INNER JOIN categorie ON recette.categorie_id = categorie.id
-INNER JOIN utilisateur  ON recette.utilisateur_id = utilisateur.id
-LEFT JOIN favoris ON recette.id = favoris.recette_id
-WHERE recette.publie = 1
-AND recette.id = :id
-GROUP BY recette.id
+FROM sejour
+INNER JOIN destination ON sejour.destination_id = destination.id
+INNER JOIN utilisateur  ON sejour.utilisateur_id = utilisateur.id
+LEFT JOIN favoris ON sejour.id = favoris.sejour_id
+WHERE sejour.publie = 1
+AND sejour.id = :id
+GROUP BY sejour.id
 
 
 ";
 
 
-$stmt = $connection->prepare($query);
-$stmt->bindParam(":id", $id);
-$stmt->execute();
+    $stmt = $connection->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
 
-return $stmt->fetch();
+    return $stmt->fetch();
 
 }
 
-function insertRecette(string $titre, int $categorie_id, string $image, string $description, string $description_courte, int $couverts, string $temps_prepa, string $temps_cuisson, int $publie, int $utilisateur_id) {
+function insertRecette(string $titre, int $destination_id, string $image, string $description, string $description_courte, int $couverts, string $temps_prepa, string $temps_cuisson, int $publie, int $utilisateur_id)
+{
     global $connection;
 
     $query = "
-    INSERT INTO recette (titre, image, description, description_courte, couverts, temps_prepa, temps_cuisson, publie, date_creation, utilisateur_id, categorie_id) 
-    VALUES (:titre, :image, :description, :description_courte, :couverts, :temps_prepa, :temps_cuisson, :publie, NOW(), :utilisateur_id, :categorie_id)
+    INSERT INTO sejour (titre, image, duree, description, niveau, libelle) 
+    VALUES (:titre, :image, :description, :sejour, :difficulte_id, :difficulte_id, :destination_id)
     ";
 
     $stmt = $connection->prepare($query);
     $stmt->bindParam(":titre", $titre);
     $stmt->bindParam(":image", $image);
-    $stmt->bindParam(":description", $description);
-    $stmt->bindParam(":description_courte", $description_courte);
-    $stmt->bindParam(":couverts", $couverts);
-    $stmt->bindParam(":temps_prepa", $temps_prepa);
-    $stmt->bindParam(":temps_cuisson", $temps_cuisson);
-    $stmt->bindParam(":publie", $publie);
-    $stmt->bindParam(":categorie_id", $categorie_id);
-    $stmt->bindParam(":utilisateur_id", $utilisateur_id);
+    $stmt->bindParam(":duree", $description);
+    $stmt->bindParam(":description", $sejour);
+    $stmt->bindParam(":niveau", $difficulte_id);
+    $stmt->bindParam(":libelle", $difficulte_id);
+
+    $stmt->bindParam(":destination_id", $destination_id);
+
     $stmt->execute();
 }

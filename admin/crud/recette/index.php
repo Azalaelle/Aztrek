@@ -52,7 +52,7 @@ require_once '../../layout/header.php';
                 <td>
                     <img src="../../../uploads/<?php echo $recipe['image']; ?>" class="img-thumbnail">
                 </td>
-                <td><?php echo $recipe['categorie']; ?></td>
+                <td><?php echo $recipe['destination']; ?></td>
                 <td><?php echo $recipe['pseudo']; ?></td>
                 <td><?php echo $recipe['date_creation_format']; ?></td>
                 <td class="actions">

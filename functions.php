@@ -9,6 +9,18 @@ function debug($var, bool $die = true) {
     }
 }
 
+
+function getCurrentUser() {
+
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+
+    if(isset($_SESSION["id"])) {
+        return getOneEntity("utilisateur", $_SESSION["id"]);
+    }
+    return null;
+}
 /**
  * Affiche le contenu du fichier header.php
  * @param string $title Titre de la page

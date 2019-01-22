@@ -1,20 +1,19 @@
 <?php
-function insertDestination(string $titre) {
-    global $connection;
 
-    $query  = "INSERT INTO destination (titre) VALUES (:titre)";
+function getAllSejoursByPays(int $id)
+{
+global $connection;
 
-    $stmt = $connection->prepare($query);
-    $stmt->bindParam(":titre", $titre);
-    $stmt->execute();
-}
-function updateDestination(int $id, string $titre) {
-    global $connection;
+$query = "
+SELECT *
+FROM destination
+INNER JOIN sejour ON destination.id = sejour.destination_id
+WHERE destination.id = :id
+";
 
-    $query  = "UPDATE destination SET titre = :titre WHERE id = :id";
+$stmt = $connection->prepare($query);
+$stmt->bindParam(":id", $id);
+$stmt->execute();
 
-    $stmt = $connection->prepare($query);
-    $stmt->bindParam(":id", $id);
-    $stmt->bindParam(":titre", $titre);
-    $stmt->execute();
+return $stmt->fetchAll();
 }
