@@ -19,7 +19,7 @@ if (isset($_GET['errcode'])) {
 require_once '../../layout/header.php';
 ?>
 
-<h1>Gestion des sejours</h1>
+<h1>Gestion des séjours</h1>
 
 <a href="create.php" class="btn btn-primary">
     <i class="fa fa-plus"></i>
@@ -40,7 +40,11 @@ require_once '../../layout/header.php';
         <tr>
             <th>Titre</th>
             <th>Image</th>
-            <th>Catégorie</th>
+            <th>Pays</th>
+            <th>Description</th>
+            <th>Durée</th>
+            <th>Prix</th>
+
             <th class="actions">Actions</th>
         </tr>
     </thead>
@@ -52,6 +56,9 @@ require_once '../../layout/header.php';
                     <img src="../../../uploads/<?php echo $sejour['image']; ?>" class="img-thumbnail">
                 </td>
                 <td><?php echo $sejour['destination']; ?></td>
+                <td><?php echo $sejour['description']; ?></td>
+                <td><?php echo $sejour['duree']; ?></td>
+                <td><?php echo $sejour['prix_indicatif']; ?></td>
                 <td class="actions">
                     <a href="update.php?id=<?php echo $sejour['id']; ?>" class="btn btn-warning">
                         <i class="fa fa-edit"></i>

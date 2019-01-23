@@ -4,6 +4,7 @@ require_once "functions.php";
 
 $id = $_GET["id"];
 $sejour = getOneSejour($id);
+$departs = getAllDepartBySejour($id);
 
 getHeader("Accueil", "Site internet Aztrek");
 ?>
@@ -20,9 +21,9 @@ getHeader("Accueil", "Site internet Aztrek");
 
 
                 <ul class="description-sejour">
-                    <li><a href="#"><i class="far fa-calendar-alt"></i></a><?= $sejour["date_depart"]; ?></li>
-                    <li><a href="#"><i class="fas fa-euro-sign"></i></a><?= $sejour["prix"]; ?></li>
-                    <li><a href="#"><i class="fas fa-signal"></i></a><?= $sejour["difficulte"]; ?></li>
+                    <li><a href="#"><i class="far fa-calendar-alt"></i></a> <?= $sejour["duree"]; ?></li>
+                    <li><a href="#"><i class="fas fa-euro-sign"></i> </a> <?= $sejour["prix_indicatif"]; ?></li>
+                    <li><a href="#"><i class="fas fa-signal"></i> </a> <?= $sejour["difficulte_libelle"]; ?> (<?= $sejour["difficulte_niveau"]; ?> / 5)</li>
                 </ul>
 
             </ul>
@@ -45,21 +46,20 @@ getHeader("Accueil", "Site internet Aztrek");
                 <th>Places restantes</th>
                 <th>Réservez dès maintenant</th>
             </tr>
-            <tr>
-                <td>15/02/2019</td>
-                <td>15/02/2019</td>
-                <td>3090€</td>
-                <td>14</td>
-                <td><a href="#">S'INSCRIRE</a></td>
-            </tr>
-            <tr>
-                <td>15/02/2019</td>
-                <td>15/02/2019</td>
-                <td>3090€</td>
-                <td>7</td>
-                <td><a href="#">S'INSCRIRE</a></td>
-            </tr>
+            <?php foreach ($departs as $depart) : ?>
+                <tr>
+                    <td><?= $depart["date_depart_format"]; ?></td>
+                    <td><?= $depart["date_retour_format"]; ?></td>
+                    <td><?= $depart["prix"]; ?> €</td>
+                    <td>14</td>
+                    <td><a href="#">S'INSCRIRE</a></td>
+                </tr>
+            <?php endforeach; ?>
         </table>
+
+
+
+
     </section>
 
 <?php getFooter(); ?>

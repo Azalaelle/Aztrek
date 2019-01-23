@@ -2,6 +2,8 @@
 require_once '../../../model/database.php';
 
 $destinations = getAllEntities("destination");
+$difficulte = getAllEntities("difficulte");
+
 
 require_once '../../layout/header.php';
 ?>
@@ -14,8 +16,8 @@ require_once '../../layout/header.php';
             <input type="text" name="titre" class="form-control" placeholder="Titre" required>
         </div>
         <div class="form-group">
-            <label>Catégorie</label>
-            <select name="categorie_id" class="form-control">
+            <label>Destination</label>
+            <select name="destination_id" class="form-control">
                 <?php foreach ($destinations as $destination) : ?>
                     <option value="<?php echo $destination["id"]; ?>">
                         <?php echo $destination["titre"]; ?>
@@ -32,20 +34,22 @@ require_once '../../layout/header.php';
             <textarea name="description" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label>Description courte</label>
-            <input type="text" name="description_courte" class="form-control" placeholder="Description courte" required>
+            <label>Durée</label>
+            <input type="number" name="duree" class="form-control" required>
         </div>
         <div class="form-group">
-            <label>Nombre de couverts</label>
-            <input type="number" name="couverts" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label>Temps de preparation</label>
-            <input type="time" name="temps_prepa" class="form-control" required>
-        </div>
-        <div class="form-group">
-            <label>Temps de cuisson</label>
-            <input type="time" name="temps_cuisson" class="form-control" required>
+            <label>Difficulté</label>
+            <select name="difficulte_id" class="form-control">
+                <?php foreach ($difficulte as $difficulte) : ?>
+                    <option value="<?php echo $difficulte["id"]; ?>">
+                        <?php echo $difficulte["niveau"]; ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <div class="form-group">
+                <label>Prix</label>
+                <input type="number" name="prix_indicatif" class="form-control" required>
+            </div>
         </div>
 
         <button type="submit" class="btn btn-success">
