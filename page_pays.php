@@ -13,6 +13,7 @@ getHeader("Accueil", "Site internet Aztrek");
 
         <h2>Nos Séjours au : <?= $destination["titre"]; ?></h2>
 
+        <?php if (count($sejours) > 0) : ?>
         <div class="circuit">
 
             <?php foreach ($sejours as $sejour) : ?>
@@ -25,8 +26,16 @@ getHeader("Accueil", "Site internet Aztrek");
             <?php endforeach; ?>
 
         </div>
+
+        <?php else : ?>
+        <p>Pas de séjour actuellement, patience...</p>
+        <?php endif; ?>
+
+
+
+
+
         <a href="page_sejour.php" class="bouton">JE DECOUVRE</a>
     </section>
-
 
 <?php getFooter(); ?>
