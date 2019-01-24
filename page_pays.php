@@ -35,7 +35,7 @@ getHeader("Accueil", "Site internet Aztrek");
 
 
 
-        <a href="page_sejour.php" class="bouton">JE DECOUVRE</a>
+        <a href="page_sejour.php?id=<?= $sejour["id"]; ?>" class="bouton">JE DECOUVRE</a>
     </section>
 
 <?php getFooter(); ?>
