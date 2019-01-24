@@ -2,15 +2,10 @@
 require_once '../../../model/database.php';
 
 $id = $_GET['id'];
-$photo = getEntity("sejour", $id);
+$sejour = getOneEntity("sejour", $id);
 $liste_destinations = getAllEntities("destination");
-$liste_tags = getAllEntities("tag");
 
-$photo_liste_tags = getAllTagsByPhoto($id);
-$photo_liste_tags_ids = [];
-foreach ($photo_liste_tags as $tag) {
-    $photo_liste_tags_ids[] = $tag["id"];
-}
+
 
 require_once '../../layout/header.php';
 ?>
@@ -20,24 +15,24 @@ require_once '../../layout/header.php';
 <form action="update_query.php" method="POST" enctype="multipart/form-data">
     <div class="form-group">
         <label>Titre</label>
-        <input type="text" name="titre" value="<?php echo $photo["titre"]; ?>" class="form-control" placeholder="Titre" required>
+        <input type="text" name="titre" value="<?php echo $sejour["titre"]; ?>" class="form-control" placeholder="Titre" required>
     </div>
     <div class="form-group">
         <label>Image</label>
         <input type="file" name="image" class="form-control">
-        <?php if ($photo["image"]) : ?>
-            <img src="../../../uploads/<?php echo $photo["image"]; ?>" class="img-thumbnail">
+        <?php if ($sejour["image"]) : ?>
+            <img src="../../../uploads/<?php echo $sejour["image"]; ?>" class="img-thumbnail">
         <?php endif; ?>
     </div>
     <div class="form-group">
         <label>Description</label>
-        <textarea name="description" class="form-control"><?php echo $photo["description"]; ?></textarea>
+        <textarea name="description" class="form-control"><?php echo $sejour["description"]; ?></textarea>
     </div>
     <div class="form-group">
         <label>Catégorie</label>
-        <select name="categorie_id" class="form-control">
+        <select name="destination_id" class="form-control">
             <?php foreach ($liste_destinations as $destination) : ?>
-                <?php $selected = ($destination["id"] == $photo["categorie_id"]) ? "selected" : ""; ?>
+                <?php $selected = ($destination["id"] == $sejour["destination_id"]) ? "selected" : ""; ?>
                 <option value="<?php echo $destination["id"]; ?>" <?php echo $selected; ?>>
                     <?php echo $destination["titre"]; ?>
                 </option>
@@ -48,7 +43,7 @@ require_once '../../layout/header.php';
         <label>Tags</label>
         <select name="tag_ids[]" class="form-control" multiple>
             <?php foreach ($liste_tags as $tag) : ?>
-                <?php $selected = (in_array($tag["id"], $photo_liste_tags_ids)) ? "selected" : ""; ?>
+                <?php $selected = (in_array($tag["id"], $sejour_liste_tags_ids)) ? "selected" : ""; ?>
                 <option value="<?php echo $tag["id"]; ?>" <?php echo $selected; ?>>
                     <?php echo $tag["titre"]; ?>
                 </option>

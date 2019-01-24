@@ -3,7 +3,7 @@ require_once '../../security.php';
 require_once '../../../model/database.php';
 
 $id = $_POST['id'];
-$photo = getEntity("sejour", $id);
+
 
 $error = deleteEntity("sejour", $id);
 

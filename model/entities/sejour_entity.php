@@ -71,3 +71,24 @@ function insertSejour(string $titre, string $image,int $duree, string $descripti
 
     $stmt->execute();
 }
+
+
+function updateSejour(int $id, string $titre, string $image, string $description, int $destination_id)
+{
+    global $connection;
+
+    $query = "
+    UPDATE sejour
+    SET titre = :titre, image = :image, description = :description, destination_id = :destination_id
+    WHERE id = :id
+    ";
+
+    $stmt = $connection->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":titre", $titre);
+    $stmt->bindParam(":image", $image);
+    $stmt->bindParam(":description", $description);
+    $stmt->bindParam(":destination_id", $destination_id);
+
+    $stmt->execute();
+}

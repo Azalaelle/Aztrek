@@ -20,18 +20,7 @@
                     Destination
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-tags"></i>
-                    Tags
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-comments"></i>
-                    Commentaires
-                </a>
-            </li>
+
         </ul>
     </div>
 </nav>
